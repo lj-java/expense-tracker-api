@@ -1,24 +1,57 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the backend API for the Expense Tracker application. It is built with Ruby on Rails and PostgreSQL and serves as the data layer for a separate Next.js frontend.
 
-Things you may want to cover:
+## Getting Started
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/expense-tracker-api.git
+    cd expense-tracker-api
+    ```
 
-* Ruby version
+2. **Install dependencies:**
+    ```bash
+    bundle install
+    ```
 
-* System dependencies
+3. **Set up the database:**
+    ```bash
+    rails db:create
+    rails db:migrate
+    ```
 
-* Configuration
+4. **Run the server:**
 
-* Database creation
+    The server will run on http://localhost:3000 by default.
+      ```bash
+      rails s
+      ```
 
-* Database initialization
+## API Endpoints
 
-* How to run the test suite
+  | Method | Endpoint | Description |
+  |:----- |:----- |:----- | 
+  | GET | /api/expenses | Get a list of all expenses. |
+  | POST | /api/expenses | Create a new expense. |
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+**Example `POST` Request:**
 
-* ...
+  To create a new expense, send a JSON object to the `api/expenses` endpoint.
+  ```bash
+  {
+    "expense": 
+    {
+      "name": "Coffee",
+      "amount": 100,
+      "date": "08-11-2025"
+    }
+  }
+  ```
+
+**Testing**
+
+  The project uses RSpec for testing. To run the tests and ensure the API is working as expected, use the following command:
+  ```bash
+  rspec
+  ```
