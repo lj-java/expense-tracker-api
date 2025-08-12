@@ -25,7 +25,7 @@ RSpec.describe Api::ExpensesController, type: :controller do
       body = JSON.parse(response.body)
       expect(body["name"]).to include("maximum of 50 characters only")
     end
-    
+
     it "returns error with missing amount" do
       post :create, params: { expense: { name: "Coffee", date: Date.today } }
       body = JSON.parse(response.body)
