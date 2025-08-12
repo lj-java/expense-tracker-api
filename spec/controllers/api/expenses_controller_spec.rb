@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::ExpensesController, type: :controller do
   describe "POST /api/expenses" do
-    let(:valid_params) { { expense: { name: "Coffee", amount: 100, date: Date.today } } }
+    let(:valid_params) { { expense: attributes_for(:expense) } }
 
     it "creates a new expense with valid params" do
       post :create, params: valid_params
@@ -51,7 +51,7 @@ RSpec.describe Api::ExpensesController, type: :controller do
     end
 
     it "returns error with date in the future" do
-      post :create, params: { expense: { name: "Coffee", amount: 100, date: Date.tomorrow } }
+      post :create, params: { expense: { name: "Coffee", amount: 100, date: Date.today + 2.days } }
       body = JSON.parse(response.body)
       expect(body["date"]).to include("can't be in the future")
     end
@@ -60,6 +60,14 @@ RSpec.describe Api::ExpensesController, type: :controller do
       post :create, params: { expense: { name: "Coffee", amount: 100, date: "01/35/2025" } }
       body = JSON.parse(response.body)
       expect(body["date"]).to include("not a valid date")
+    end
+  end
+
+  describe "DELETE /api/expenses/:id" do
+    it "destroys the expense" do
+      expense = create(:expense)
+      delete :destroy, params: { id: expense.id }
+      expect(response).to have_http_status(:ok)
     end
   end
 end
