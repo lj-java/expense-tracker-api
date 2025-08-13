@@ -1,19 +1,20 @@
-databases:
-  - name: expensetracker_db
-    databaseName: expensetracker_db
-    user: expensetracker
-
+# Exported from Render on 2025-08-13T03:07:53Z
 services:
-  - type: web
-    name: expense-tracker-api
-    env: ruby
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: expensetracker_db
-          property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
-        
+- type: web
+  name: expense-tracker-api
+  runtime: ruby
+  repo: https://github.com/lj-java/expense-tracker-api
+  plan: free
+  envVars:
+  - key: DATABASE_URL
+    sync: false
+  - key: RAILS_MASTER_KEY
+    sync: false
+  - key: WEB_CONCURRENCY
+    sync: false
+  region: oregon
+  buildCommand: bundle install; DATABASE_URL=$DATABASE_URL bundle exec rails db:create;
+    DATABASE_URL=$DATABASE_URL bundle exec rails db:migrate;
+  startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
+  autoDeployTrigger: commit
+version: "1"
