@@ -61,3 +61,7 @@ The project uses RSpec for testing. To run the tests and ensure the API is worki
 ```bash
 rspec
 ```
+
+## **Deployment**
+
+The project is deployed on Render. The API is available at [https://expense-tracker-api-njls.onrender.com/api/expenses](https://expense-tracker-api-njls.onrender.com/api/expenses).
