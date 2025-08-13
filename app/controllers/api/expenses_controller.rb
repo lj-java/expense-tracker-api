@@ -1,6 +1,6 @@
 class Api::ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all
+    @expenses = Expense.all.order(date: :desc)
     render json: @expenses
   end
 
