@@ -82,13 +82,13 @@ production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
 
-  queue:
-    <<: *default
-    url: <%= ENV['DATABASE_URL'] %>
+queue:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 
-  cable:
-    <<: *default
-    url: <%= ENV['DATABASE_URL'] %>
+cable:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
 #     database: expensetracker_db
 #     username: expense_tracker
 #     password: <%= ENV["EXPENSE_TRACKER_DATABASE_PASSWORD"] %>
