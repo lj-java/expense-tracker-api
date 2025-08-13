@@ -97,6 +97,9 @@ production:
 #     <<: *primary_production
 #     database: expense_tracker_production_cable
 #     migrations_paths: db/cable_migrate
-cable:
-  adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
+  queue:
+    adapter: postgresql
+    url: <%= ENV['DATABASE_URL'] %>
+  cable:
+    adapter: postgresql
+    url: <%= ENV['DATABASE_URL'] %>
